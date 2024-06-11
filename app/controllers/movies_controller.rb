@@ -4,8 +4,9 @@ class MoviesController < ApplicationController
   # GET /movies or /movies.json
   def index
     if params[:actor].present?
+      actor_search_term = "%" + params[:actor] + "%"
       @movies = Movie.joins(:reviews)
-                     .where("actor LIKE ?", "%#{params[:actor]}%")
+                     .where("EXISTS (SELECT 1 FROM unnest(actors) actor WHERE actor ILIKE ?)", actor_search_term)
                      .group("movies.id")
                      .order(Arel.sql("AVG(reviews.stars) DESC"))
     else

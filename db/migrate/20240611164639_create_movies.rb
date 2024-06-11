@@ -5,7 +5,7 @@ class CreateMovies < ActiveRecord::Migration[7.0]
       t.text :description
       t.integer :year
       t.string :director
-      t.string :actor
+      t.string :actors, array: true, default: [] # Change this line
       t.string :filming_location
       t.string :country
 

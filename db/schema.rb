@@ -19,7 +19,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_11_165334) do
     t.text "description"
     t.integer "year"
     t.string "director"
-    t.string "actor"
+    t.string "actors", default: [], array: true
     t.string "filming_location"
     t.string "country"
     t.datetime "created_at", null: false

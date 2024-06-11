@@ -21,7 +21,9 @@
 
   <p>
     <strong>Actor:</strong>
-    <%= movie.actor %>
+    <% movie.actors.each do |actor| %>
+      <%= actor %>,
+    <% end %>
   </p>
 
   <p>
