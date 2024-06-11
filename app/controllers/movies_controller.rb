@@ -3,7 +3,16 @@ class MoviesController < ApplicationController
 
   # GET /movies or /movies.json
   def index
-    @movies = Movie.all
+    if params[:actor].present?
+      @movies = Movie.joins(:reviews)
+                     .where("actor LIKE ?", "%#{params[:actor]}%")
+                     .group("movies.id")
+                     .order(Arel.sql("AVG(reviews.stars) DESC"))
+    else
+      @movies = Movie.left_outer_joins(:reviews)
+                     .group("movies.id")
+                     .order(Arel.sql("COALESCE(AVG(reviews.stars), 0) DESC"))
+    end
   end
 
   # GET /movies/1 or /movies/1.json

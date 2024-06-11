@@ -2,6 +2,16 @@
 
 <h1>Movies</h1>
 
+<%= form_with(url: movies_path, method: "get") do %>
+  <div class="field">
+    <%= label_tag :actor, "Search by Actor:" %>
+    <%= text_field_tag :actor, params[:actor] %>
+  </div>
+  <div class="actions">
+    <%= submit_tag "Search" %>
+  </div>
+<% end %>
+
 <div id="movies">
   <% @movies.each do |movie| %>
     <%= render movie %>
