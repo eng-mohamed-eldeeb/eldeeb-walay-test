@@ -12,7 +12,7 @@ namespace :import do
       movie.director ||= movie_attrs[:director]
       movie.filming_location ||= movie_attrs[:filming_location]
       movie.country ||= movie_attrs[:country]
-      movie.actors = (movie.actors || []) | [movie_attrs[:actor]] # Ensure unique actors
+      movie.actors = (movie.actors || []) | [movie_attrs[:actor]]
       movie.save!
     end
   end
